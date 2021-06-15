@@ -36,7 +36,7 @@ def read_klanten():
 def read_klant(klant_id: UUID):
     result = [klant for klant in example_source if klant.id == klant_id]
     if not result:
-        raise HTTPException(status_code=404, detail="Klant with id {klant_id} not found")
+        raise HTTPException(status_code=404, detail="Klant with id " + str(klant_id) + " not found")
     return result[0]
 
 
@@ -59,7 +59,7 @@ def update_klant(klant_id: UUID, klantIn: KlantIn):
     result = [klant for klant in example_source if klant.id == klant_id]
     if not result:
         raise HTTPException(
-            status_code=404, detail="Klant with id {klant_id} not found")
+            status_code=404, detail="Klant with id " + str(klant_id) + " not found")
     example_source.remove(result[0])
     klantOut = KlantOut(**klantIn.dict(), id=klant_id)
     example_source.append(klantOut)
@@ -71,6 +71,6 @@ def delete_klant(klant_id: UUID):
     result = [klant for klant in example_source if klant.id == klant_id]
     if not result:
         raise HTTPException(
-            status_code=404, detail="Klant with id {klant_id} not found")
+            status_code=404, detail="Klant with id " + str(klant_id) + " not found")
     example_source.remove(result[0])
     return result[0]
